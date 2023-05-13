@@ -1,0 +1,11 @@
+# AllExchangeServer
+$ExchangeServers = Get-ExchangeServer
+
+# All Microsoft Exchange Health Manager Services Reboot
+foreach ($Server in $ExchangeServers) {
+    $ServerName = $Server.Name
+    Write-Host "Processing $ServerName"
+    Invoke-Command -ComputerName $ServerName -ScriptBlock {
+        Restart-Service -Name MSExchangeHM -Force -Verbose
+    }
+}
