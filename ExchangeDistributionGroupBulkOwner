@@ -1,0 +1,10 @@
+# OU DL List
+$distGroups = Get-DistributionGroup -OrganizationalUnit "ou=YourOU,dc=YourDomain,dc=com"
+
+# Owner Account Name
+$newOwner = "YourUserName"
+
+# DL Owner Add
+foreach ($group in $distGroups) {
+    Set-DistributionGroup -Identity $group.Identity -ManagedBy $newOwner
+}
